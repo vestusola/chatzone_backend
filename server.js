@@ -22,24 +22,8 @@ let api = require("./routes/api");
 app.use('/api/v1', api);
 
 // Set Port
-let port = process.env.PORT || 3000;
+let port = process.env.PORT || 5000;
 
-// Check if is master
-if (cluster.isMaster) {
-    log(`Master ${process.pid} is running`);
-
-    log(`Forking ${numberOfWorker} workers`)
-
-    let workers = [...Array(numberOfWorker)].map(_ => cluster.fork())
-
-    cluster.on('online', (worker) => log(`Worker ${worker.process.pid} is online`))
-    cluster.on('exit', (worker, exitCode) => {
-        log(`Worker ${worker.process.id} exited with code ${exitCode}`)
-        log(`Starting a new worker`)
-        cluster.fork()
-    });
-} else {
-    app.listen(port, () => {
-        console.log(`Server running on port: ${port}`);
-    });
-}
+app.listen(port, () => {
+  console.log(`Server running on port: ${port}`);
+});
