@@ -1,15 +1,27 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Roles', {
+    return queryInterface.createTable('Messages', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.BIGINT
       },
-      role: {
-        type: Sequelize.STRING
+      user_id: {
+        type: Sequelize.BIGINT
+      },
+      friend_id: {
+        type: Sequelize.BIGINT
+      },
+      message: {
+        type: Sequelize.TEXT,
+        allowNull: false
+      },
+      status: {
+        type: Sequelize.ENUM,
+        values: ["sent", "delivered", "read"],
+        defaultValue: "sent"
       },
       createdAt: {
         allowNull: false,
@@ -22,6 +34,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Roles');
+    return queryInterface.dropTable('Messages');
   }
 };

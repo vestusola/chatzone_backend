@@ -6,7 +6,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT
       },
       group_id: {
         type: Sequelize.BIGINT,
@@ -19,6 +19,11 @@ module.exports = {
       message: {
         type: Sequelize.TEXT,
         allowNull: false
+      },
+      status: {
+        type: Sequelize.ENUM,
+        values: ["sent", "delivered", "read"],
+        defaultValue: "sent"
       },
       createdAt: {
         allowNull: false,

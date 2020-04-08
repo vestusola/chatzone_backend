@@ -3,7 +3,12 @@ module.exports = (sequelize, DataTypes) => {
   const GroupMessage = sequelize.define('GroupMessage', {
     group_id: DataTypes.BIGINT,
     user_id: DataTypes.BIGINT,
-    message: DataTypes.TEXT
+    message: DataTypes.TEXT,
+    status: {
+      type: DataTypes.ENUM,
+      values: ["sent",  "delivered", "read"],
+      defaultValue: "sent"
+    }
   }, {});
   GroupMessage.associate = function(models) {
     // associations can be defined here
@@ -14,7 +19,6 @@ module.exports = (sequelize, DataTypes) => {
     GroupMessage.belongsTo(models.User, {
       foreignKey: "user_id"
     });
-    
   };
   return GroupMessage;
 };

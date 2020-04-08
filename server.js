@@ -2,14 +2,7 @@ let express = require('express');
 let cors = require('cors');
 let bodyParser = require("body-parser");
 let app = express();
-let cluster = require('cluster');
 let helmet = require('helmet');
-
-let cpus = require('os').cpus();
-let isMaster = cluster.isMaster;
-let numberOfWorker = cpus.length;
-
-let log = require('./module/logs');
 
 app.use(helmet());
 app.use(cors());
